@@ -2,6 +2,36 @@ import java.util.Scanner;
 
 public class CeaserCypher {
 
+    public static String Cypher(char[] alphabets) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String cypherString = "";
+
+        System.out.println("Enter the String To Cypher: ");
+        String userString = sc.nextLine();
+
+        System.out.print("Enter the number of shift want to Perform: ");
+        int shift = sc.nextInt();
+
+        userString = userString.toLowerCase();
+        char[] userStringArray = userString.toCharArray();
+        for (char c : userStringArray) {
+
+            for (int i = 0; i <= alphabets.length - 1; i++) {
+                if (c == alphabets[i]) {
+                    cypherString += alphabets[i + shift];
+                    break;
+                }
+            }
+
+        }
+
+        sc.close();
+
+        return cypherString;
+    }
+
     public static void main(String[] args) {
 
         char[] alphabets = {
@@ -11,24 +41,10 @@ public class CeaserCypher {
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
         };
 
-        Scanner sc = new Scanner(System.in);
+        String cypherString = Cypher(alphabets);
 
-        System.out.println("Enter the String To Desphier: ");
-        String userString = sc.nextLine();
+        System.out.println("Cyphered Text: " + cypherString);
 
-        System.out.print("Enter the number of shift want to Perform: ");
-        int shift = sc.nextInt();
-
-
-        char[] userStringArray = userString.toCharArray();
-
-        for (int i = 0; i <= userStringArray.length-1 ; i++) {
-            System.out.print(userStringArray[i+shift]+" ");
-        }
-
-
-
-        sc.close();
     }
 
 }
