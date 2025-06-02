@@ -11,7 +11,7 @@ public class Encrypt {
         System.out.println("\n\nEnter the String To Cypher: ");
         String userString = sc.nextLine();
 
-        System.out.print("Enter the number of shift want to Perform: ");
+        System.out.print("Enter the number of shift want to Perform With Sign: ");
         int shift = sc.nextInt();
         shift = shift % 26;
 
