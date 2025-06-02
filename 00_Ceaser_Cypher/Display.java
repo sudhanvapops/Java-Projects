@@ -21,7 +21,7 @@ public class Display {
                   |||||
                 """);
         System.out.println("=======================");
-        System.out.println("1. Cypher\n2. Decypher");
+        System.out.println("1. Cypher\n2. Decypher\n3. Exit Program");
         System.out.println("=======================");
     }    
 }

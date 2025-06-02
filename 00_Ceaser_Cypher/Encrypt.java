@@ -2,17 +2,17 @@ import java.util.Scanner;
 
 public class Encrypt {
 
-    public static String Cypher() {
+    public static String Cypher(Scanner sc) {
 
         StringBuilder result = new StringBuilder();
 
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n\nEnter the String To Cypher: ");
         String userString = sc.nextLine();
 
         System.out.print("Enter the number of shift want to Perform With Sign: ");
         int shift = sc.nextInt();
+        sc.nextLine();
         shift = shift % 26;
 
         for (char c : userString.toCharArray()) {
@@ -28,8 +28,6 @@ public class Encrypt {
             }
 
         }
-
-        sc.close();
 
         return result.toString();
     }

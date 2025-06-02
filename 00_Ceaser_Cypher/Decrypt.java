@@ -2,11 +2,10 @@ import java.util.Scanner;
 
 public class Decrypt {
 
-    public static String deCypher() {
+    public static String deCypher(Scanner sc) {
 
         StringBuilder result = new StringBuilder();
 
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n\nEnter the String To DeCypher: ");
         String userString = sc.nextLine();
@@ -27,7 +26,6 @@ public class Decrypt {
                 result.append(c);
             }
         }
-        sc.close();
         return result.toString();
     }
 

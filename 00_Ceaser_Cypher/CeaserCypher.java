@@ -5,38 +5,56 @@ import java.awt.datatransfer.Clipboard;
 
 public class CeaserCypher {
 
+    private static final Scanner sc = new Scanner(System.in);
+
+    private static void exitProgram() {
+        sc.close();
+        System.out.println("Exiting Program...");
+        System.exit(0);
+    }
+
+    private static void copyToClipbord(String text) {
+        StringSelection stringSelection = new StringSelection(text);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+    }
+
+    private static void handleEncryption() {
+        String cypherString = Encrypt.Cypher(sc);
+        System.out.println("\nCyphered Text: " + cypherString + "\n\n");
+        copyToClipbord(cypherString);
+    }
+
+    private static void handleDecryption() {
+        String decypherString = Decrypt.deCypher(sc);
+        System.out.println("\nDeCyphered Text: " + decypherString + "\n\n");
+        copyToClipbord(decypherString);
+    }
+
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        while (true) {
+            
+            Display.display();
+            System.out.print("Enter the Choice: ");
 
-        Display.display();
+            int choice = sc.nextInt();
+            sc.nextLine();
 
-        System.out.print("Enter the Choice: ");
-        int choice = sc.nextInt();
+            if (choice == 1) {
+                handleEncryption();
+            } else if (choice == 2) {
+                handleDecryption();
+            } else if (choice == 3) {
+                exitProgram();
+            } else {
+                System.out.println("Invalid Choice");
+                System.exit(1);
+            }
 
-        if (choice == 1) {
-
-            String cypherString = Encrypt.Cypher();
-            System.out.println("\nCyphered Text: " + cypherString + "\n\n");
-            StringSelection stringSelection = new StringSelection(cypherString);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-
-            clipboard.setContents(stringSelection, null);
-
-        } else if (choice == 2) {
-
-            String decypherString = Decrypt.deCypher();
-            System.out.println("\nDeCyphered Text: " + decypherString + "\n\n");
-            StringSelection stringSelection = new StringSelection(decypherString);
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, null);
-
-        } else {
-            System.out.println("Invalid Choice");
-            System.exit(1);
+            System.out.println("Do You want to continue (y/n): ");
+            sc.nextLine();
         }
-
-        sc.close();
     }
 
 }
