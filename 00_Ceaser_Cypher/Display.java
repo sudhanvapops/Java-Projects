@@ -1,5 +1,5 @@
 public class Display {
-        public static void display(){
+    public static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -9,6 +9,11 @@ public class Display {
         } catch (Exception e) {
             System.out.println("Error clearing screen: " + e.getMessage());
         }
+    }
+
+    public static void display() {
+
+        clearScreen();
 
         System.out.println("\n=======================");
         System.out.println("Ceaser Cypher");
@@ -23,5 +28,5 @@ public class Display {
         System.out.println("=======================");
         System.out.println("1. Cypher\n2. Decypher\n3. Exit Program");
         System.out.println("=======================");
-    }    
+    }
 }
