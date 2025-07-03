@@ -6,16 +6,24 @@ public class Library {
     ArrayList<Book> mainShelf = new ArrayList<>();
     ArrayList<Book> borrowedBooks = new ArrayList<>();
 
-    // Adding Books to Library List
+
+    // Adding Books to Main Shelf 
     public void addBook(Book book) {
         mainShelf.add(book);
-        // ! And Display Appropraie message afterwrads
+        System.out.println("Book Added: "+ book);
     };
 
-    // Removing from Library List
-    public void removeBook(Book book) {
-        mainShelf.remove(book);
-        // ! And Display Appropraie message afterwrads
+    // Removing from Main Shelf List
+    public void removeBook(String key) {
+        key = key.trim();
+
+        for (Book book : mainShelf) {
+            if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
+                mainShelf.remove(book);
+                System.out.println("Book Removed: "+ book);
+            }
+        }
+        System.out.println("Book Not Found: "+ key);
     };
 
     // Geting all the books
@@ -46,6 +54,7 @@ public class Library {
         return new BookResult(false, null);
     }
 
+
     // method for boorwoing a book
     public void borrowBook(String key) {
         BookResult bookObj = isBookAvailable(key);
@@ -58,6 +67,7 @@ public class Library {
             System.out.println(key + "Book is Not Available to Borrow ");
         }
     };
+
 
     // Method for returning a book
     public void returnBook(String key) {
@@ -75,6 +85,7 @@ public class Library {
     };
 
 }
+
 
 // Making a Record for the iSavailable method
 record BookResult(boolean found, Book book) {}
