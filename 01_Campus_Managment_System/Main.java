@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Manager.StudentManager;
-import model.Library;
 import model.Student;
 
 public class Main {
@@ -24,6 +23,7 @@ public class Main {
             System.out.println("2. View Student");
             System.out.println("3. Update Student");
             System.out.println("4. Delete Student");
+            System.out.println("5. View All Students");
             
             System.out.println("5. Deposit Money");
             System.out.println("6. Withdraw Money");
@@ -40,8 +40,9 @@ public class Main {
 
             switch (choice) {
                 case 1 -> sm.addStudent();
-                case 2 -> sm.viewStudents();
-                // case 3 -> lm.borrowBook(...);
+                case 2 -> sm.viewStudent();
+                case 3 -> sm.updateStudent();
+                case 5 -> sm.viewStudents();
                 case 0 -> System.exit(0);
             }
 
