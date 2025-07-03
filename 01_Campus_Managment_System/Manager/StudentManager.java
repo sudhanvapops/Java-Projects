@@ -4,19 +4,18 @@ import model.BankAccount;
 import model.SavingAccount;
 import model.Student;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.UUID;
+import Utils.StudentUtils;
 
 public class StudentManager {
+
+    private ArrayList<Student> students;
+    Scanner sc = new Scanner(System.in);
 
     public StudentManager(ArrayList<Student> students) {
         this.students = students;
     }
-
-    Scanner sc = new Scanner(System.in);
-
-    private ArrayList<Student> students;
 
     private String generateAccountNumber() {
         while (true) {
@@ -65,7 +64,7 @@ public class StudentManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine();
 
-        Student student = findStudentById(id);
+        Student student = StudentUtils.findStudentById(students,id);
 
         if (student != null) {
             System.out.println(student);
@@ -86,7 +85,7 @@ public class StudentManager {
         System.out.print("Enter STudent Id: ");
         String id = sc.nextLine();
 
-        Student student = findStudentById(id);
+        Student student = StudentUtils.findStudentById(students,id);
 
         if (student != null) {
             System.out.println(student);
@@ -113,26 +112,18 @@ public class StudentManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine().trim();
 
-        Student student = findStudentById(id);
+        Student student = StudentUtils.findStudentById(students,id);
 
-        if(student != null){
+        if (student != null) {
             System.out.println(student);
             students.remove(student);
             System.out.println("Student Deleted Succesfully");
-        }else{
-            System.out.println("No student was found with id: "+id);
+        } else {
+            System.out.println("No student was found with id: " + id);
         }
-       
+
     }
 
     // Helper Functions
-
-    private Student findStudentById(String id) {
-        for (Student student : students) {
-            if (student.getId().equalsIgnoreCase(id))
-                return student;
-        }
-        return null;
-    }
 
 }

@@ -7,6 +7,10 @@ public class Student {
     String name;
     String grade;
 
+    BankAccount account;
+    ArrayList<Book> borrowedBooks = new ArrayList<>();
+
+
     public void setId(String id) {
         this.id = id;
     }
@@ -31,12 +35,10 @@ public class Student {
         this.grade = grade;
     }
 
-    BankAccount account;
     public BankAccount getAccount() {
         return account;
     }
 
-    ArrayList<Book> borrowedBooks = new ArrayList<>();
     
     public Student(String id, String name, String grade, BankAccount account) {
         this.id = id;

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Manager.BankManager;
 import Manager.StudentManager;
 import model.Student;
 
@@ -12,7 +13,7 @@ public class Main {
 
         StudentManager sm = new StudentManager(students);
         // LibraryManager lm = new LibraryManager(new Library());
-        // BankManager bm = new BankManager(sm);
+        BankManager bm = new BankManager(sm,students);
 
 
 
@@ -25,7 +26,7 @@ public class Main {
             System.out.println("4. Delete Student");
             System.out.println("5. View All Students");
             
-            System.out.println("5. Deposit Money");
+            System.out.println("6. Deposit Money");
             System.out.println("6. Withdraw Money");
             System.out.println("7. Transfer Money");
             
@@ -42,7 +43,10 @@ public class Main {
                 case 1 -> sm.addStudent();
                 case 2 -> sm.viewStudent();
                 case 3 -> sm.updateStudent();
+                case 4 -> sm.deleteStudent();
                 case 5 -> sm.viewStudents();
+                
+                case 6 -> bm.depositMoney();
                 case 0 -> System.exit(0);
             }
 
