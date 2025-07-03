@@ -5,7 +5,6 @@ import model.SavingAccount;
 import model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 import Utils.StudentUtils;
 
 public class StudentManager {
@@ -17,54 +16,40 @@ public class StudentManager {
         this.students = students;
     }
 
-    private String generateAccountNumber() {
-        while (true) {
-            String id = "ACC-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-            boolean isUnique = true;
-
-            for (Student s : students) {
-                if (s.getAccount().getAccountNumber().equalsIgnoreCase(id)) {
-                    isUnique = false;
-                    break;
-                }
-            }
-
-            if (isUnique) {
-                return id;
-            }
-
-        }
-    }
-
     public void addStudent() {
         System.out.print("Enter Your Name: ");
         String name = sc.nextLine().trim();
 
-        System.out.print("Enter Id: ");
-        String id = sc.nextLine().trim();
-
         System.out.print("Enter Grade: ");
         String grade = sc.nextLine().trim();
+
+        if (!(name.equalsIgnoreCase("") || grade.equalsIgnoreCase(""))) {
+            BankAccount account;
+            String accountNumber = "ACC-" + StudentUtils.generateUniqueId(students);
+
+            account = new SavingAccount(accountNumber, 0.0);
+
+            String id = "4VMIS" + StudentUtils.generateUniqueId(students);
+
+            Student student = new Student(id, name, grade, account);
+            students.add(student);
+
+            System.out.println("Student added successfuly: " + "\n" + student);
+        }else{
+            System.out.println("Fileds cannot be Empty !!");
+        }
 
         // ! Implement Later
         // System.out.print("Enter Account Type (savings/checking): ");
         // String type = sc.nextLine().trim().toLowerCase();
 
-        BankAccount account;
-        String accountNumber = generateAccountNumber();
-
-        account = new SavingAccount(accountNumber, 0.0);
-        Student student = new Student(id, name, grade, account);
-        students.add(student);
-
-        System.out.println("Student added successfuly: " + "\n" + student);
     }
 
     public void viewStudent() {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine();
 
-        Student student = StudentUtils.findStudentById(students,id);
+        Student student = StudentUtils.findStudentById(students, id);
 
         if (student != null) {
             System.out.println(student);
@@ -85,7 +70,7 @@ public class StudentManager {
         System.out.print("Enter STudent Id: ");
         String id = sc.nextLine();
 
-        Student student = StudentUtils.findStudentById(students,id);
+        Student student = StudentUtils.findStudentById(students, id);
 
         if (student != null) {
             System.out.println(student);
@@ -112,7 +97,7 @@ public class StudentManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine().trim();
 
-        Student student = StudentUtils.findStudentById(students,id);
+        Student student = StudentUtils.findStudentById(students, id);
 
         if (student != null) {
             System.out.println(student);
@@ -123,7 +108,5 @@ public class StudentManager {
         }
 
     }
-
-    // Helper Functions
 
 }

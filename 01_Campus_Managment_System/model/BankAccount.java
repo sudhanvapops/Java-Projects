@@ -21,9 +21,4 @@ public abstract class BankAccount {
         this.balance = balance;
     }
     
-    abstract public void deposit(double amount);
-    
-    abstract public void withdraw(double amount);
-
-    
 }
