@@ -58,20 +58,21 @@ public class StudentManager {
         Student student = new Student(id, name, grade, account);
         students.add(student);
 
-        System.out.println("Student added successfuly: "+"\n"+student);
+        System.out.println("Student added successfuly: " + "\n" + student);
     }
 
     public void viewStudent() {
-        System.out.print("Enter STudent Id: ");
+        System.out.print("Enter Student Id: ");
         String id = sc.nextLine();
 
-        for (Student student : students) {
-            if (student.getId().equalsIgnoreCase(id)) {
-                System.out.println(student);
-                return;
-            }
+        Student student = findStudentById(id);
+
+        if (student != null) {
+            System.out.println(student);
+            return;
+        } else {
+            System.out.println("No Student Found: " + id);
         }
-        System.out.println("No Student Found: " + id);
     }
 
     public void viewStudents() {
@@ -85,42 +86,53 @@ public class StudentManager {
         System.out.print("Enter STudent Id: ");
         String id = sc.nextLine();
 
-        for (Student student : students) {
-            if (student.getId().equalsIgnoreCase(id)) {
-                System.out.println(student);
+        Student student = findStudentById(id);
 
-                System.out.print("Enter Updated Id: ");
-                student.setId(sc.nextLine().trim());
+        if (student != null) {
+            System.out.println(student);
 
-                System.out.print("Enter Updated Name: ");
-                student.setName(sc.nextLine().trim());
+            System.out.print("Enter Updated Id: ");
+            student.setId(sc.nextLine().trim());
 
-                System.out.print("Enter Updated Grade: ");
-                student.setGrade(sc.nextLine().trim());
+            System.out.print("Enter Updated Name: ");
+            student.setName(sc.nextLine().trim());
 
-                System.out.println("Student Updated Succesfuly: "+student);
-                return;
+            System.out.print("Enter Updated Grade: ");
+            student.setGrade(sc.nextLine().trim());
 
-            }
+            System.out.println("Student Updated Succesfuly: " + student);
+            return;
+
         }
+
         System.out.println("No Student Found: " + id);
     }
 
     public void deleteStudent() {
 
-        System.out.print("Enter STudent Id: ");
-        String id = sc.nextLine();
+        System.out.print("Enter Student Id: ");
+        String id = sc.nextLine().trim();
 
-        Iterator<Student> iterator = students.iterator();
-        while (iterator.hasNext()) {
-            Student student = iterator.next();
-            if (student.getId().equalsIgnoreCase(id)) {
-                System.out.println(student);
-                iterator.remove(); // safe removal
-                System.out.println("Student deleted successfully.");
-                return;
-            }
+        Student student = findStudentById(id);
+
+        if(student != null){
+            System.out.println(student);
+            students.remove(student);
+            System.out.println("Student Deleted Succesfully");
+        }else{
+            System.out.println("No student was found with id: "+id);
         }
+       
+    }
+
+    // Helper Functions
+
+    private Student findStudentById(String id) {
+        for (Student student : students) {
+            if (student.getId().equalsIgnoreCase(id))
+                return student;
+        }
+        return null;
     }
 
 }
