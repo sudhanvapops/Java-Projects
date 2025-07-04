@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
+
+import Utils.LibraryUtils;
 
 public class Library {
 
@@ -49,6 +52,32 @@ public class Library {
         }
     }
 
+    // Update Book
+    public void updateBook(String key,Scanner sc){
+        Book book = LibraryUtils.findBookBykeyMainShelf(key, mainShelf);
+
+        if (book != null){
+            System.out.println("Enter the Details You want to Update: ");
+            System.out.print("Enter Updated Id: ");
+            String id = sc.nextLine();
+            System.out.print("Enter Updated Author: ");
+            String author =  sc.nextLine();
+            System.out.print("Enter Updated Title: ");
+            String Title = sc.nextLine();
+
+            book.setAuthor(author);
+            book.setBookId(id);
+            book.setTitle(Title);
+
+            System.out.println("Book has been Updated");
+            System.out.println(book);
+
+        }else{
+            System.out.println("Book Not Found "+key);
+        }
+        
+    }
+
     // Checking for availiblity of a book using both title and book id
     public BookResult isBookAvailable(String key) {
         for (Book book : mainShelf) {
@@ -90,7 +119,7 @@ public class Library {
         }
     };
 
-    
+
 
 }
 
