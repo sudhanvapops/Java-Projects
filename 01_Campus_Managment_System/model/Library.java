@@ -1,31 +1,35 @@
 package model;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Library {
 
     // Shelfs
-    ArrayList<Book> mainShelf = new ArrayList<>();
-    ArrayList<Book> borrowedBooks = new ArrayList<>();
+    public ArrayList<Book> mainShelf = new ArrayList<>();
+    public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
-
-    // Adding Books to Main Shelf 
+    // Adding Books to Main Shelf
     public void addBook(Book book) {
         mainShelf.add(book);
-        System.out.println("Book Added: "+ book);
+        System.out.println("Book Added: " + book);
     };
 
     // Removing from Main Shelf List
     public void removeBook(String key) {
         key = key.trim();
 
-        for (Book book : mainShelf) {
+        Iterator<Book> iterator = mainShelf.iterator();
+        while (iterator.hasNext()) {
+            Book book = iterator.next();
             if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
-                mainShelf.remove(book);
-                System.out.println("Book Removed: "+ book);
+                iterator.remove();
+                System.out.println("Book Removed: " + book);
+                return;
             }
         }
-        System.out.println("Book Not Found: "+ key);
-    };
+        System.out.println("Book Not Found: " + key);
+    }
 
     // Geting all the books
     public void viewAllBooks(ShelfType shelfName) {
@@ -55,20 +59,21 @@ public class Library {
         return new BookResult(false, null);
     }
 
-
     // method for boorwoing a book
-    public void borrowBook(String key) {
+    public Book borrowBook(String key) {
+        key = key.trim();
         BookResult bookObj = isBookAvailable(key);
         if (bookObj.found()) {
             Book book = bookObj.book();
             borrowedBooks.add(book);
             mainShelf.remove(book);
             System.out.println("Book borrowed: " + book.title);
+            return book;
         } else {
             System.out.println(key + "Book is Not Available to Borrow ");
+            return null;
         }
     };
-
 
     // Method for returning a book
     public void returnBook(String key) {
@@ -87,11 +92,6 @@ public class Library {
 
 }
 
-
 // Making a Record for the iSavailable method
-record BookResult(boolean found, Book book) {}
-
-// enum for viewAllbooks
-enum ShelfType {
-    MAIN, BORROWED;
+record BookResult(boolean found, Book book) {
 }

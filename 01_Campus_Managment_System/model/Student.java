@@ -7,9 +7,17 @@ public class Student {
     String name;
     String grade;
 
-    BankAccount account;
-    ArrayList<Book> borrowedBooks = new ArrayList<>();
+    public BankAccount account;
+    public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
+
+    public ArrayList<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(ArrayList<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
 
     public void setId(String id) {
         this.id = id;

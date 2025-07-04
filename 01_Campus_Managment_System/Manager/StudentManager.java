@@ -16,6 +16,18 @@ public class StudentManager {
         this.students = students;
     }
 
+    // ? Test Function
+
+    public void testAddStudents(){
+        
+        students.add(new Student("Test-001", "Sudhanva S", "Btech 2nd Sem", new SavingAccount("Test-1", 0)));
+        students.add(new Student("Test-002", "Punitha V", "Btech 2nd Sem", new SavingAccount("Test-2", 0)));
+        students.add(new Student("Test-003", "Adithya Kalluriya", "Btech 2nd Sem", new SavingAccount("Test-3", 0)));
+        students.add(new Student("Test-004", "Vinya H G", "Btech 2nd Sem", new SavingAccount("Test-4", 0)));
+
+        
+    }
+
     public void addStudent() {
         System.out.print("Enter Your Name: ");
         String name = sc.nextLine().trim();
