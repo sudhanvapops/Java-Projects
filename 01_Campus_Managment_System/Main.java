@@ -74,6 +74,7 @@ public class Main {
                     case 10 -> lm.addBook();
                     case 11 -> lm.viewAllBooks();
                     case 12 -> lm.removeBook();
+                    case 13 -> lm.updateBook();
 
                     case 14 -> lm.borrowBook();
 

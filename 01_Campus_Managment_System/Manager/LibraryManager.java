@@ -89,7 +89,14 @@ public class LibraryManager {
 
     // Update Book
     
+    public void updateBook(){
+        System.out.print("Enter The book Id you want to update: ");
+        String id = sc.nextLine();
+        System.out.flush();
 
+        l1.updateBook(id, sc);
+
+    }
 
     // Boorrow Book
     public void borrowBook() {
