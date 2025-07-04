@@ -1,9 +1,9 @@
 package model;
 public class Book {
     
-    String bookId;
-    String title;
-    String author;
+    public String bookId;
+    public String title;
+    public String author;
 
     public Book(String bookId, String title, String author) {
         this.bookId = bookId;
