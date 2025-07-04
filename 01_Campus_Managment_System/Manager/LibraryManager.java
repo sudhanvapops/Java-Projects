@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+import Utils.LibraryUtils;
 import Utils.StudentUtils;
 import model.Book;
 import model.Library;
@@ -48,6 +49,8 @@ public class LibraryManager {
     }
 
     // ? Test Function
+
+    // Add Books
     public void testAddBook() {
         l1.addBook(new Book("1", "Dune 1", "Sudhanva 1"));
         l1.addBook(new Book("2", "Dune 2", "Sudhanva 2"));
@@ -88,8 +91,8 @@ public class LibraryManager {
     }
 
     // Update Book
-    
-    public void updateBook(){
+
+    public void updateBook() {
         System.out.print("Enter The book Id you want to update: ");
         String id = sc.nextLine();
         System.out.flush();
@@ -110,9 +113,48 @@ public class LibraryManager {
 
             Book bookBorrowed = l1.borrowBook(bookToBorrow);
 
-            if(bookBorrowed != null){
+            if (bookBorrowed != null) {
                 student.getBorrowedBooks().add(bookBorrowed);
             }
+        }
+
+    }
+
+    // Return Book
+    public void returnBook() {
+        System.out.println("Enter The Student Id: ");
+        String studentId = sc.nextLine().trim();
+        Student student = StudentUtils.findStudentById(students, studentId);
+        Boolean flag = true;
+
+        if (student != null) {
+            while (flag) {
+                System.out.print("Enter The Book Id: ");
+                String bookId = sc.nextLine().trim();
+                Book book = l1.returnBook(bookId);
+
+                if (book != null) {
+                    student.getBorrowedBooks().remove(book);
+                }
+
+                while (true) {
+                    System.out.print("Do you want to return another book (y/n): ");
+                    String choice = sc.nextLine().trim();
+    
+                    if(choice.equalsIgnoreCase("n")){
+                        flag = false;
+                        break;
+                    }else if (choice.equalsIgnoreCase("n")) {
+                        flag = true;
+                        break;
+                    }else{
+                        System.out.println("Enter Correct Choice");
+                    }
+                }
+            }
+
+        } else {
+            System.out.println("Student Not found: " + studentId);
         }
 
     }

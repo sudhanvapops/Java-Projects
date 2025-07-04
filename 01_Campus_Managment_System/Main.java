@@ -4,6 +4,7 @@ import java.util.Scanner;
 import Manager.BankManager;
 import Manager.LibraryManager;
 import Manager.StudentManager;
+import model.Book;
 import model.Library;
 import model.Student;
 
@@ -77,6 +78,7 @@ public class Main {
                     case 13 -> lm.updateBook();
 
                     case 14 -> lm.borrowBook();
+                    case 15 -> lm.returnBook();
 
                     case 0 -> System.exit(0);
                 }

@@ -53,6 +53,7 @@ public class Student {
         this.name = name;
         this.grade = grade;
         this.account = account;
+        this.borrowedBooks =  new ArrayList<>();
     }
 
     @Override

@@ -53,15 +53,15 @@ public class Library {
     }
 
     // Update Book
-    public void updateBook(String key,Scanner sc){
+    public void updateBook(String key, Scanner sc) {
         Book book = LibraryUtils.findBookBykeyMainShelf(key, mainShelf);
 
-        if (book != null){
+        if (book != null) {
             System.out.println("Enter the Details You want to Update: ");
             System.out.print("Enter Updated Id: ");
             String id = sc.nextLine();
             System.out.print("Enter Updated Author: ");
-            String author =  sc.nextLine();
+            String author = sc.nextLine();
             System.out.print("Enter Updated Title: ");
             String Title = sc.nextLine();
 
@@ -72,10 +72,10 @@ public class Library {
             System.out.println("Book has been Updated");
             System.out.println(book);
 
-        }else{
-            System.out.println("Book Not Found "+key);
+        } else {
+            System.out.println("Book Not Found " + key);
         }
-        
+
     }
 
     // Checking for availiblity of a book using both title and book id
@@ -105,21 +105,20 @@ public class Library {
     };
 
     // Method for returning a book
-    public void returnBook(String key) {
+    public Book returnBook(String key) {
         key = key.trim();
 
-        for (Book book : borrowedBooks) {
-            if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
-                borrowedBooks.remove(book);
-                mainShelf.add(book);
-                System.out.println("Book Returned: " + book.title);
-                return;
-            }
-            System.out.println("No borrowed book found with ID or title: " + key);
+        Book book = LibraryUtils.findBookBykeyBorrowedBooks(key, borrowedBooks);
+
+        if (book != null) {
+            borrowedBooks.remove(book);
+            mainShelf.add(book);
+            System.out.println("Book Returned: " + book.title);
+            return book;
         }
+        System.out.println("No borrowed book found with ID or title: " + key);
+        return null;
     };
-
-
 
 }
 
