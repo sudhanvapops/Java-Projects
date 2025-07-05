@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import Data.UserData;
 import Manager.BankManager;
 import Manager.LibraryManager;
 import Manager.StudentManager;
@@ -10,8 +11,10 @@ import Utils.PermissionConfig;
 import model.Library;
 import model.Role;
 import model.Student;
+import model.User;
 
 public class Main {
+
     public static void main(String[] args) {
 
         ArrayList<Student> students = new ArrayList<>();
@@ -23,72 +26,110 @@ public class Main {
         BankManager bm = new BankManager(sm, students);
         LibraryManager lm = new LibraryManager(students, sm, l1);
 
-        Map<Role, List<Integer>> permissions = PermissionConfig.getPermissionMap();
-        
+        Map<String, User> userDataMap = UserData.userMap;
+        Map<Role, List<Integer>> permissionsMap = PermissionConfig.getPermissionMap();
 
         // ? Testing Codes
         lm.testAddBook();
         sm.testAddStudents();
 
         while (true) {
-            System.out.println("\n===== Campus Management Menu =====");
 
-            System.out.println("1. Add Student");
-            System.out.println("2. View Student");
-            System.out.println("3. Update Student");
-            System.out.println("4. Delete Student");
-            System.out.println("5. View All Students");
+            System.out.print("Enter Your username: ");
+            String userName = sc.nextLine().trim().toLowerCase();
 
-            System.out.println("6. Deposit Money");
-            System.out.println("7. Withdraw Money");
-            System.out.println("8. View Balance");
-            System.out.println("9. Transfer Money");
+            if (!userDataMap.containsKey(userName)) {
+                System.out.println("User not found. Please try again.\n");
+                continue;
+            }
 
-            System.out.println("10. Add Book");
-            System.out.println("11. View All Books");
-            System.out.println("12. Remove Book");
-            System.out.println("13. Update Book");
+            System.out.print("Enter Your Password: ");
+            String userPassword = sc.nextLine().trim();
 
-            System.out.println("14. Borrow Book");
-            System.out.println("15. Return Book");
+            if (!userDataMap.get(userName).getPassword().equals(userPassword)) {
+                System.out.println("Password is incorrect please try again");
+                continue;
+            }
 
-            System.out.println("0. Exit");
-            // Adding Books and all those still remain
-            // And only admin can depoisit money
+            User currentUser = userDataMap.get(userName);
+            Role currentRole = currentUser.getRole();
 
-            System.out.println("\n==================================\n");
-            System.out.print("Enter your choice: ");
+            List<Integer> allowedOptions = permissionsMap.get(currentRole);
 
-            try {
-                Integer choice = sc.nextInt();
-                sc.nextLine();
-                switch (choice) {
-                    case 1 -> sm.addStudent();
-                    case 2 -> sm.viewStudent();
-                    case 3 -> sm.updateStudent();
-                    case 4 -> sm.deleteStudent();
-                    case 5 -> sm.viewStudents();
+            System.out.println("Logged in as" + currentUser.getUserName() + " Role: [ " + currentRole.name() + " ]");
 
-                    case 6 -> bm.depositMoney();
-                    case 7 -> bm.withDrawMoney();
-                    case 8 -> bm.showBalance();
-                    case 9 -> bm.transferMoney();
+            Map<Integer, Runnable> actionMap = Map.ofEntries(
+                    Map.entry(1, () -> sm.addStudent()),
+                    Map.entry(2, () -> sm.viewStudent()),
+                    Map.entry(3, () -> sm.updateStudent()),
+                    Map.entry(4, () -> sm.deleteStudent()),
+                    Map.entry(5, () -> sm.viewStudents()),
+                    Map.entry(6, () -> bm.depositMoney()),
+                    Map.entry(7, () -> bm.withDrawMoney()),
+                    Map.entry(8, () -> bm.showBalance()),
+                    Map.entry(9, () -> bm.transferMoney()),
+                    Map.entry(10, () -> lm.addBook()),
+                    Map.entry(11, () -> lm.viewAllBooks()),
+                    Map.entry(12, () -> lm.removeBook()),
+                    Map.entry(13, () -> lm.updateBook()),
+                    Map.entry(14, () -> lm.borrowBook()),
+                    Map.entry(15, () -> lm.returnBook()));
 
-                    case 10 -> lm.addBook();
-                    case 11 -> lm.viewAllBooks();
-                    case 12 -> lm.removeBook();
-                    case 13 -> lm.updateBook();
+            Map<Integer, String> menuText = Map.ofEntries(
+                    Map.entry(1, "Add Student"),
+                    Map.entry(2, "View Student"),
+                    Map.entry(3, "Update Student"),
+                    Map.entry(4, "Delete Student"),
+                    Map.entry(5, "View All Students"),
+                    Map.entry(6, "Deposit Money"),
+                    Map.entry(7, "Withdraw Money"),
+                    Map.entry(8, "View Balance"),
+                    Map.entry(9, "Transfer Money"),
+                    Map.entry(10, "Add Book"),
+                    Map.entry(11, "View All Books"),
+                    Map.entry(12, "Remove Book"),
+                    Map.entry(13, "Update Book"),
+                    Map.entry(14, "Borrow Book"),
+                    Map.entry(15, "Return Book"),
+                    Map.entry(99, "Logout"),
+                    Map.entry(0, "Exit"));
 
-                    case 14 -> lm.borrowBook();
-                    case 15 -> lm.returnBook();
+            while (true) {
+                System.out.println("\n===== Menu [" + currentRole + "] =====");
+                for (Integer key : allowedOptions) {
+                    System.out.println(key + ". " + menuText.get(key));
+                }
+                System.out.println("99. Logout");
+                System.out.println("0. Exit");
+                System.out.println("==================================");
+                System.out.print("\nEnter your choice: ");
 
-                    case 0 -> System.exit(0);
+                try {
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    System.out.flush();
+
+                    if (choice == 0)
+                        System.exit(0);
+                    if (choice == 99)
+                        break;
+
+                    if (!allowedOptions.contains(choice)) {
+                        System.out.println("You dont Have Permision for this option");
+                    }
+
+                    Runnable action = actionMap.get(choice);
+                    if (action != null) {
+                        action.run();
+                    } else {
+                        System.out.println("Invalid Option");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Exception: \n" + e);
+                    System.out.println("Input Invalid, Try Agian");
                 }
 
-            } catch (Exception e) {
-                System.out.println("Exception " + e);
-                System.out.println("Please choose a correct option");
-                sc.nextLine();
             }
         }
 
