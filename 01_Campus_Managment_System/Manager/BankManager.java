@@ -3,7 +3,7 @@ package Manager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Utils.StudentUtils;
+import Utils.SearchUtils;
 import model.Student;
 
 public class BankManager {
@@ -19,7 +19,7 @@ public class BankManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine().trim();
 
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.print("Enter amount to deposit: ");
@@ -45,7 +45,7 @@ public class BankManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine().trim();
 
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.println("Student Found");
@@ -80,7 +80,7 @@ public class BankManager {
     public void showBalance() {
         System.out.println("Enter Id: ");
         String id = sc.nextLine();
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.println("Balance: " + student.getAccount().getBalance());
@@ -103,10 +103,10 @@ public class BankManager {
             double moneyTrans = sc.nextDouble();
             sc.nextLine();
 
-            Student studentFrom = StudentUtils.findStudentByAcc(students, accNumber1);
+            Student studentFrom = SearchUtils.findStudentByKey(accNumber1, students);
             double studentFromBalance = studentFrom.getAccount().getBalance();
             
-            Student studentTo = StudentUtils.findStudentByAcc(students, accNumber2);
+            Student studentTo = SearchUtils.findStudentByKey(accNumber2, students);
             double studentToBalance = studentTo.getAccount().getBalance();
 
             if (studentFrom != null && studentTo != null) {

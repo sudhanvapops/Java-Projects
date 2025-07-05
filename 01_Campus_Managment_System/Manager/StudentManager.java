@@ -5,6 +5,8 @@ import model.SavingAccount;
 import model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Utils.SearchUtils;
 import Utils.StudentUtils;
 
 public class StudentManager {
@@ -61,7 +63,7 @@ public class StudentManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine();
 
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.println(student);
@@ -82,7 +84,7 @@ public class StudentManager {
         System.out.print("Enter STudent Id: ");
         String id = sc.nextLine();
 
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.println(student);
@@ -109,7 +111,7 @@ public class StudentManager {
         System.out.print("Enter Student Id: ");
         String id = sc.nextLine().trim();
 
-        Student student = StudentUtils.findStudentById(students, id);
+        Student student = SearchUtils.findStudentByKey(id, students);
 
         if (student != null) {
             System.out.println(student);

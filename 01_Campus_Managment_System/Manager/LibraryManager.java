@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-import Utils.StudentUtils;
+import Utils.SearchUtils;
 import model.Book;
 import model.Library;
 import model.ShelfType;
@@ -102,7 +102,7 @@ public class LibraryManager {
     public void borrowBook() {
         System.out.print("Enter the Id of the student: ");
         String studentId = sc.nextLine().trim();
-        Student student = StudentUtils.findStudentById(students, studentId);
+        Student student = SearchUtils.findStudentByKey(studentId, students);
 
         if (student != null) {
             System.out.print("Enter the Id/Title of the book to boorow: ");
@@ -121,7 +121,7 @@ public class LibraryManager {
     public void returnBook() {
         System.out.println("Enter The Student Id: ");
         String studentId = sc.nextLine().trim();
-        Student student = StudentUtils.findStudentById(students, studentId);
+        Student student = SearchUtils.findStudentByKey(studentId, students);
         Boolean flag = true;
 
         if (student != null) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import Utils.LibraryUtils;
+import Utils.SearchUtils;
 
 public class Library {
 
@@ -71,7 +71,7 @@ public class Library {
 
     // Update Book
     public void updateBook(String key, Scanner sc) {
-        Book book = LibraryUtils.findBookBykeyMainShelf(key, mainShelf);
+        Book book = SearchUtils.findBookByKey(key, mainShelf);
 
         if (book != null) {
             System.out.println("Enter the Details You want to Update: ");
@@ -125,7 +125,7 @@ public class Library {
     public Book returnBook(String key) {
         key = key.trim();
 
-        Book book = LibraryUtils.findBookBykeyBorrowedBooks(key, borrowedBooks);
+        Book book = SearchUtils.findBookByKey(key, borrowedBooks);
 
         if (book != null) {
             borrowedBooks.remove(book);

@@ -21,25 +21,15 @@ public class Student {
 
     
     // Gettres
-    public ArrayList<Book> getBorrowedBooks() {
-        return new ArrayList<>(borrowedBooks);
-    }
+    public ArrayList<Book> getBorrowedBooks() {return new ArrayList<>(borrowedBooks);}
 
-    public String getId() {
-        return id;
-    }
+    public String getId() {return id;}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
-    public String getGrade() {
-        return grade;
-    }
+    public String getGrade() {return grade;}
 
-    public BankAccount getAccount() {
-        return account;
-    }
+    public BankAccount getAccount() {return account;}
 
     // Setters
     public void setId(String id) {
