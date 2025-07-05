@@ -34,12 +34,11 @@ public class Library {
 
     // Removing from Main Shelf List
     public void removeBook(String key) {
-        key = key.trim();
 
-        if (key == null || key.isEmpty()) {
+        if (key == null || key.trim().isEmpty()) {
             throw new IllegalArgumentException("Search key cannot be Empty");
         }
-
+        key = key.trim();
         Iterator<Book> iterator = mainShelf.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
@@ -49,7 +48,7 @@ public class Library {
                 return;
             }
         }
-        System.out.println("Book Not Found: " + key);
+        System.out.println("Book Not Found: " + key.trim());
     }
 
     // Geting all the books

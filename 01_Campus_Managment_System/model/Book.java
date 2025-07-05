@@ -42,11 +42,10 @@ public class Book {
 
     // Validation Method
     private String validateNotEmpty(String value, String fieldname) {
-        value = value.trim();
-        if (value == null || value.isEmpty()) {
+        if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException(fieldname + " cannot be empty");
         }
-        return value;
+        return value.trim();
     }
 
     @Override
