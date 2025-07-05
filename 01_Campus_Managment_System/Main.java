@@ -1,30 +1,34 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import Manager.BankManager;
 import Manager.LibraryManager;
 import Manager.StudentManager;
-import model.Book;
+import Utils.PermissionConfig;
 import model.Library;
+import model.Role;
 import model.Student;
 
 public class Main {
     public static void main(String[] args) {
-        
+
         ArrayList<Student> students = new ArrayList<>();
         Library l1 = new Library();
 
         Scanner sc = new Scanner(System.in);
 
         StudentManager sm = new StudentManager(students);
-        BankManager bm = new BankManager(sm,students);
-        LibraryManager lm = new LibraryManager(students,sm,l1);
+        BankManager bm = new BankManager(sm, students);
+        LibraryManager lm = new LibraryManager(students, sm, l1);
 
+        Map<Role, List<Integer>> permissions = PermissionConfig.getPermissionMap();
+        
 
         // ? Testing Codes
         lm.testAddBook();
         sm.testAddStudents();
-
 
         while (true) {
             System.out.println("\n===== Campus Management Menu =====");
@@ -34,13 +38,12 @@ public class Main {
             System.out.println("3. Update Student");
             System.out.println("4. Delete Student");
             System.out.println("5. View All Students");
-            
+
             System.out.println("6. Deposit Money");
             System.out.println("7. Withdraw Money");
             System.out.println("8. View Balance");
             System.out.println("9. Transfer Money");
-            
-            
+
             System.out.println("10. Add Book");
             System.out.println("11. View All Books");
             System.out.println("12. Remove Book");
@@ -56,7 +59,6 @@ public class Main {
             System.out.println("\n==================================\n");
             System.out.print("Enter your choice: ");
 
-            
             try {
                 Integer choice = sc.nextInt();
                 sc.nextLine();
@@ -66,12 +68,12 @@ public class Main {
                     case 3 -> sm.updateStudent();
                     case 4 -> sm.deleteStudent();
                     case 5 -> sm.viewStudents();
-                    
+
                     case 6 -> bm.depositMoney();
                     case 7 -> bm.withDrawMoney();
                     case 8 -> bm.showBalance();
                     case 9 -> bm.transferMoney();
-                    
+
                     case 10 -> lm.addBook();
                     case 11 -> lm.viewAllBooks();
                     case 12 -> lm.removeBook();
@@ -82,9 +84,9 @@ public class Main {
 
                     case 0 -> System.exit(0);
                 }
-    
+
             } catch (Exception e) {
-                System.out.println("Exception "+e);
+                System.out.println("Exception " + e);
                 System.out.println("Please choose a correct option");
                 sc.nextLine();
             }
