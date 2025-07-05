@@ -12,18 +12,10 @@ public class Student {
     private ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     // Validation method
-    private String validateNotEmpty(String value, String fieldName) {
-        if (value == null) {
-            throw new IllegalArgumentException(fieldName + " cannot be empty");
-        }
-        return value.trim();
-    }
-
     private <T> T validateNotEmpty(T obj, String fieldName) {
         if (obj == null) {
             throw new IllegalArgumentException(fieldName + " cannot be null");
         }
-
         return obj;
     }
 
