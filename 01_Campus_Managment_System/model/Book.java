@@ -33,7 +33,6 @@ public class Book {
     }
 
 
-
     // Constructor
     public Book(String bookId, String title, String author) {
         this.bookId = validateNotEmpty(bookId, "Book ID");

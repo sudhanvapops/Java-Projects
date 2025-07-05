@@ -9,11 +9,25 @@ import Utils.LibraryUtils;
 public class Library {
 
     // Shelfs
-    private ArrayList<Book> mainShelf = new ArrayList<>();
-    private ArrayList<Book> borrowedBooks = new ArrayList<>();
+    private final ArrayList<Book> mainShelf = new ArrayList<>();
+    private final ArrayList<Book> borrowedBooks = new ArrayList<>();
+
+    // private helper method
+    private Book findBookById(String bookId) {
+        return mainShelf.stream()
+                .filter(book -> book.getBookId().equalsIgnoreCase(bookId))
+                .findFirst()
+                .orElse(null);
+    }
 
     // Adding Books to Main Shelf
     public void addBook(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book cannot be null");
+        }
+        if (findBookById(book.getBookId()) != null) {
+            throw new IllegalArgumentException("Book with ID " + book.getBookId() + " already exists");
+        }
         mainShelf.add(book);
         System.out.println("Book Added: " + book);
     };
@@ -21,6 +35,10 @@ public class Library {
     // Removing from Main Shelf List
     public void removeBook(String key) {
         key = key.trim();
+
+        if (key == null || key.isEmpty()) {
+            throw new IllegalArgumentException("Search key cannot be Empty");
+        }
 
         Iterator<Book> iterator = mainShelf.iterator();
         while (iterator.hasNext()) {
