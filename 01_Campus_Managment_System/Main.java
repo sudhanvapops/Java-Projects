@@ -23,8 +23,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         StudentManager sm = new StudentManager(students);
-        BankManager bm = new BankManager(sm, students);
-        LibraryManager lm = new LibraryManager(students, sm, l1);
+        BankManager bm = new BankManager(students);
+        LibraryManager lm = new LibraryManager(students,l1);
 
         Map<String, User> userDataMap = UserData.userMap;
         Map<Role, List<Integer>> permissionsMap = PermissionConfig.getPermissionMap();

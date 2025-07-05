@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-import Utils.LibraryUtils;
 import Utils.StudentUtils;
 import model.Book;
 import model.Library;
@@ -14,7 +13,6 @@ import model.Student;
 public class LibraryManager {
 
     private ArrayList<Student> students;
-    private StudentManager sm;
     private Library l1;
 
     Scanner sc = new Scanner(System.in);
@@ -23,8 +21,7 @@ public class LibraryManager {
             1, ShelfType.MAIN,
             2, ShelfType.BORROWED);
 
-    public LibraryManager(ArrayList<Student> students, StudentManager sm, Library l1) {
-        this.sm = sm;
+    public LibraryManager(ArrayList<Student> students, Library l1) {
         this.students = students;
         this.l1 = l1;
     }

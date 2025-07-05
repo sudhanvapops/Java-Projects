@@ -11,7 +11,7 @@ public class BankManager {
     private ArrayList<Student> students;
     Scanner sc = new Scanner(System.in);
 
-    public BankManager(StudentManager sm, ArrayList<Student> students) {
+    public BankManager(ArrayList<Student> students) {
         this.students = students;
     }
 
