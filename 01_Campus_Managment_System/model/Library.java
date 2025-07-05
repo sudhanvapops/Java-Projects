@@ -9,8 +9,8 @@ import Utils.LibraryUtils;
 public class Library {
 
     // Shelfs
-    public ArrayList<Book> mainShelf = new ArrayList<>();
-    public ArrayList<Book> borrowedBooks = new ArrayList<>();
+    private ArrayList<Book> mainShelf = new ArrayList<>();
+    private ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     // Adding Books to Main Shelf
     public void addBook(Book book) {
@@ -25,7 +25,7 @@ public class Library {
         Iterator<Book> iterator = mainShelf.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
-            if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
+            if (book.getBookId().equalsIgnoreCase(key) || book.getTitle().equalsIgnoreCase(key)) {
                 iterator.remove();
                 System.out.println("Book Removed: " + book);
                 return;
@@ -81,7 +81,7 @@ public class Library {
     // Checking for availiblity of a book using both title and book id
     public BookResult isBookAvailable(String key) {
         for (Book book : mainShelf) {
-            if (book.bookId.equalsIgnoreCase(key.trim()) || book.title.equalsIgnoreCase(key.trim())) {
+            if (book.getBookId().equalsIgnoreCase(key.trim()) || book.getTitle().equalsIgnoreCase(key.trim())) {
                 return new BookResult(true, book);
             }
         }
@@ -96,7 +96,7 @@ public class Library {
             Book book = bookObj.book();
             borrowedBooks.add(book);
             mainShelf.remove(book);
-            System.out.println("Book borrowed: " + book.title);
+            System.out.println("Book borrowed: " + book.getTitle());
             return book;
         } else {
             System.out.println(key + "Book is Not Available to Borrow ");
@@ -113,7 +113,7 @@ public class Library {
         if (book != null) {
             borrowedBooks.remove(book);
             mainShelf.add(book);
-            System.out.println("Book Returned: " + book.title);
+            System.out.println("Book Returned: " + book.getTitle());
             return book;
         }
         System.out.println("No borrowed book found with ID or title: " + key);

@@ -11,7 +11,7 @@ public record LibraryUtils() {
         key = key.trim();
 
         for (Book book : mainShelf) {
-            if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
+            if (book.getBookId().equalsIgnoreCase(key) || book.getTitle().equalsIgnoreCase(key)) {
                 return book;
             } 
         }
@@ -24,7 +24,7 @@ public record LibraryUtils() {
         key = key.trim();
 
         for (Book book : borrowedBooks) {
-            if (book.bookId.equalsIgnoreCase(key) || book.title.equalsIgnoreCase(key)) {
+            if (book.getBookId().equalsIgnoreCase(key) || book.getTitle().equalsIgnoreCase(key)) {
                 return book;
             } 
         }

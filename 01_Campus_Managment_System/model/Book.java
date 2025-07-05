@@ -1,9 +1,9 @@
 package model;
 public class Book {
     
-    public String bookId;
-    public String title;
-    public String author;
+    private String bookId;
+    private String title;
+    private String author;
 
     public String getBookId() {
         return bookId;
@@ -34,6 +34,16 @@ public class Book {
         this.title = title;
         this.author = author;
     }
+
+    // Validation Method
+    private String validateNotEmpty(String value,String fieldname){
+        value = value.trim();
+        if(value == null || value.isEmpty()){
+            throw new IllegalArgumentException(fieldname+" cannot be empty");
+        }
+        return value;
+    }
+
 
     @Override
     public String toString() {
