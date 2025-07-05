@@ -109,8 +109,11 @@ public class Main {
                     sc.nextLine();
                     System.out.flush();
 
-                    if (choice == 0)
+                    if (choice == 0){
+                        sc.close();
                         System.exit(0);
+                    }
+                       
                     if (choice == 99)
                         break;
 
