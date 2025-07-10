@@ -104,28 +104,31 @@ public class BankManager {
             sc.nextLine();
 
             Student studentFrom = SearchUtils.findStudentByKey(accNumber1, students);
-            double studentFromBalance = studentFrom.getAccount().getBalance();
-            
+
             Student studentTo = SearchUtils.findStudentByKey(accNumber2, students);
-            double studentToBalance = studentTo.getAccount().getBalance();
 
             if (studentFrom != null && studentTo != null) {
+                double studentFromBalance = studentFrom.getAccount().getBalance();
+                double studentToBalance = studentTo.getAccount().getBalance();
+
                 if (studentFromBalance >= moneyTrans) {
                     studentFrom.getAccount().setBalance(studentFromBalance - moneyTrans);
-                    studentTo.getAccount().setBalance(studentToBalance+moneyTrans);
+                    studentTo.getAccount().setBalance(studentToBalance + moneyTrans);
 
-                    System.out.println("Name: "+studentFrom.getName()+"Balance: "+studentFrom.getAccount().getBalance());
-                    System.out.println("Name: "+studentTo.getName()+"Balance: "+studentTo.getAccount().getBalance());
+                    System.out.println(
+                            "Name: " + studentFrom.getName() + "Balance: " + studentFrom.getAccount().getBalance());
+                    System.out.println(
+                            "Name: " + studentTo.getName() + "Balance: " + studentTo.getAccount().getBalance());
 
-                }else{
-                    System.out.println("Balnce Not Sufficient: "+studentFromBalance);
+                } else {
+                    System.out.println("Balnce Not Sufficient: " + studentFromBalance);
                 }
-            }else{
+            } else {
                 System.out.println("Student Not Found");
             }
 
         } catch (Exception e) {
-            
+
         }
     }
 

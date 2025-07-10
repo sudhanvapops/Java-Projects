@@ -15,19 +15,18 @@ import model.User;
 
 public class Main {
 
+    private static final Scanner sc = new Scanner(System.in);
+    private static final Map<String, User> userDataMap = UserData.userMap;
+    private static final Map<Role, List<Integer>> permissionsMap = PermissionConfig.getPermissionMap();
+
     public static void main(String[] args) {
 
         ArrayList<Student> students = new ArrayList<>();
         Library l1 = new Library();
 
-        Scanner sc = new Scanner(System.in);
-
         StudentManager sm = new StudentManager(students);
         BankManager bm = new BankManager(students);
-        LibraryManager lm = new LibraryManager(students,l1);
-
-        Map<String, User> userDataMap = UserData.userMap;
-        Map<Role, List<Integer>> permissionsMap = PermissionConfig.getPermissionMap();
+        LibraryManager lm = new LibraryManager(students, l1);
 
         // ? Testing Codes
         lm.testAddBook();
@@ -109,11 +108,11 @@ public class Main {
                     sc.nextLine();
                     System.out.flush();
 
-                    if (choice == 0){
+                    if (choice == 0) {
                         sc.close();
                         System.exit(0);
                     }
-                       
+
                     if (choice == 99)
                         break;
 
@@ -131,6 +130,7 @@ public class Main {
                 } catch (Exception e) {
                     System.out.println("Exception: \n" + e);
                     System.out.println("Input Invalid, Try Agian");
+                    sc.nextLine();
                 }
 
             }

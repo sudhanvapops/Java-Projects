@@ -21,7 +21,7 @@ public class Student {
 
     
     // Gettres
-    public ArrayList<Book> getBorrowedBooks() {return new ArrayList<>(borrowedBooks);}
+    public ArrayList<Book> getBorrowedBooks() {return borrowedBooks;}
 
     public String getId() {return id;}
 
@@ -45,7 +45,7 @@ public class Student {
     }
 
     public void setBorrowedBooks(ArrayList<Book> borrowedBooks) {
-        this.borrowedBooks = validateNotEmpty(borrowedBooks, "Borrwed Books");
+        this.borrowedBooks = borrowedBooks;
     }
 
     // Counstructor

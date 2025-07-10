@@ -112,7 +112,11 @@ public class LibraryManager {
 
             if (bookBorrowed != null) {
                 student.getBorrowedBooks().add(bookBorrowed);
+            }else{
+                System.out.println("Didint get borrowed book");
             }
+        }else{
+            System.out.println("Student Not Found "+studentId);
         }
 
     }
@@ -141,7 +145,7 @@ public class LibraryManager {
                     if(choice.equalsIgnoreCase("n")){
                         flag = false;
                         break;
-                    }else if (choice.equalsIgnoreCase("n")) {
+                    }else if (choice.equalsIgnoreCase("y")) {
                         flag = true;
                         break;
                     }else{
